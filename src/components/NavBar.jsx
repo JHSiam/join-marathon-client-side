@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { AuthContext } from "../authentication/AuthProvider";
 
 const NavBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logout } = useContext(AuthContext);
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    logout();
   };
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -36,9 +35,8 @@ const NavBar = () => {
 
       {/* Links */}
       <div
-        className={`${
-          isMenuOpen ? "block" : "hidden"
-        } absolute top-full left-0 w-full bg-base-100 shadow-lg z-40 md:static md:flex md:items-center md:w-auto`}
+        className={`${isMenuOpen ? "block" : "hidden"
+          } absolute top-full left-0 w-full bg-base-100 shadow-lg z-40 md:static md:flex md:items-center md:w-auto`}
       >
         <ul className="menu menu-vertical md:menu-horizontal p-4 md:p-0 md:gap-4 w-full md:w-auto">
           <li>
@@ -63,7 +61,7 @@ const NavBar = () => {
               Marathons
             </NavLink>
           </li>
-          {isLoggedIn ? (
+          {user ? (
             <>
               <li>
                 <NavLink
@@ -79,7 +77,11 @@ const NavBar = () => {
               <li tabIndex={0} className="dropdown dropdown-hover">
                 <a className="btn btn-ghost avatar flex items-center">
                   <div className="w-8 rounded-full">
-                    <img src="https://via.placeholder.com/150" alt="User Avatar" />
+                    <img
+                      src={user?.photoURL}
+                      alt="User Profile"
+                      className="h-10 w-10 rounded-full border-2 border-yellow-300"
+                    />
                   </div>
                 </a>
                 <ul className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
@@ -111,7 +113,6 @@ const NavBar = () => {
                     isActive ? "text-primary font-bold" : "text-base-content"
                   }
                   onClick={() => {
-                    handleLogin();
                     setIsMenuOpen(false);
                   }}
                 >

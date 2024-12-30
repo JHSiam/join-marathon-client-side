@@ -7,11 +7,28 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from './components/ErrorPage.jsx';
+import AuthProvider from './authentication/AuthProvider.jsx';
+import Login from './authentication/Login.jsx';
+import Register from './authentication/Register.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
     errorElement:<ErrorPage></ErrorPage>,
+    children: [
+      {
+        path:"/",
+        element: <div>Hello</div>
+      },
+      {
+        path:"/login",
+        element:<Login></Login>
+      },
+      {
+        path:"/register",
+        element:<Register></Register>
+      }
+    ]
     
   },
   
@@ -19,9 +36,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <AuthProvider> */}
+    <AuthProvider>
       <RouterProvider router={router}></RouterProvider>
-    {/* </AuthProvider> */}
+    </AuthProvider>
     
   </StrictMode>,
 )
