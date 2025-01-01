@@ -10,6 +10,12 @@ import ErrorPage from './components/ErrorPage.jsx';
 import AuthProvider from './authentication/AuthProvider.jsx';
 import Login from './authentication/Login.jsx';
 import Register from './authentication/Register.jsx';
+import Dashboard from './components/Dashboard.jsx';
+import AddMarathon from './components/dashoboardPages/AddMarathon.jsx';
+import MyMarathonList from './components/dashoboardPages/MyMarathonList.jsx';
+import MyApplyList from './components/dashoboardPages/MyApplyList.jsx';
+import MarathonsGrid from './components/dashoboardPages/MarathonsGrid.jsx';
+import MarathonDetails from './components/dashoboardPages/MarathonDetails.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +33,32 @@ const router = createBrowserRouter([
       {
         path:"/register",
         element:<Register></Register>
+      },
+      {
+        path:"/dashboard",
+        element:<Dashboard></Dashboard>,
+        children:[
+          {
+            path:"add-marathon",
+            element:<AddMarathon></AddMarathon>
+          },
+          {
+            path:"my-marathon-list",
+            element:<MyMarathonList></MyMarathonList>
+          },
+          {
+            path:"my-apply-list",
+            element:<MyApplyList></MyApplyList>
+          }
+        ]
+      },
+      {
+        path:"/marathons",
+        element:<MarathonsGrid></MarathonsGrid>
+      },
+      {
+        path:"/details/:id",
+        element:<MarathonDetails></MarathonDetails>
       }
     ]
     
