@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 export default function MarathonDetails() {
   const { id } = useParams();
   const [marathon, setMarathon] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Fetch marathon details by ID
@@ -86,7 +87,7 @@ export default function MarathonDetails() {
       <p className="text-gray-600 mb-4">
         <strong>Registrations Count:</strong> {count}
       </p>
-      <p className="text-gray-400 text-sm mb-6">
+      <p className="text-gray-600 text-sm mb-6">
         <strong>Created At:</strong> {new Date(createdAt).toLocaleDateString()}
       </p>
 
@@ -95,6 +96,7 @@ export default function MarathonDetails() {
         className={`btn w-full ${
           isRegistrationOpen ? 'btn-primary' : 'btn-disabled'
         }`}
+        onClick={()=>navigate(`/marathon-registration/${id}`)}
       >
         {isRegistrationOpen ? 'Register Now' : 'Registration Closed'}
       </button>

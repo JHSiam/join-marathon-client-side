@@ -17,28 +17,26 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="navbar bg-base-100 shadow-md px-4 md:px-8 relative overflow-hidden">
+    <nav className="navbar bg-base-100 shadow-md px-4 md:px-8 relative flex justify-between">
       {/* Logo */}
-      <div className="flex-1">
+      <div className="">
         <NavLink to="/" className="btn btn-ghost normal-case text-xl">
           MyApp
         </NavLink>
+
+        
       </div>
 
-      {/* Hamburger Icon for Small Devices */}
-      <div className="md:hidden flex-none z-50">
-        <button onClick={toggleMenu} className="btn btn-ghost">
-          {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
-      </div>
+      {/* Hamburger Menu for Small Devices */}
+      <div className="md:hidden">
+          <button onClick={toggleMenu} className="btn btn-ghost">
+            {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
 
-      {/* Links */}
-      <div
-        className={`${
-          isMenuOpen ? "block" : "hidden"
-        } md:block absolute md:relative top-full md:top-0 left-0 w-full bg-base-100 shadow-lg md:shadow-none z-40 md:z-auto md:flex md:items-center md:w-auto`}
-      >
-        <ul className="menu menu-vertical md:menu-horizontal p-4 md:p-0 md:gap-4 w-full md:w-auto">
+      {/* Small & Medium Devices Menu */}
+      {isMenuOpen && (
+        <ul className="menu menu-vertical bg-base-100 shadow-lg p-4 absolute top-full left-0 w-full z-40 md:hidden">
           <li>
             <NavLink
               to="/"
@@ -74,24 +72,24 @@ const NavBar = () => {
                   Dashboard
                 </NavLink>
               </li>
-              <li className="">
-                <div className="avatar flex items-center">
-                  <div className="w-8 rounded-full">
-                    <img
-                      src={user?.photoURL || "https://via.placeholder.com/40"}
-                      alt="User Profile"
-                      className="h-10 w-10 rounded-full border-2 border-yellow-300"
-                    />
+              <li>
+                <div className="flex items-center gap-4">
+                  <div className="avatar">
+                    <div className="w-8 rounded-full">
+                      <img
+                        src={user?.photoURL || "https://via.placeholder.com/40"}
+                        alt="User Profile"
+                        className="rounded-full border-2 border-yellow-300"
+                      />
+                    </div>
                   </div>
-
                   <button
-                      onClick={handleLogout}
-                      className="text-base-content btn"
-                    >
-                      Logout
-                    </button>
+                    onClick={handleLogout}
+                    className="btn btn-outline btn-sm"
+                  >
+                    Logout
+                  </button>
                 </div>
-                
               </li>
             </>
           ) : (
@@ -121,6 +119,74 @@ const NavBar = () => {
             </>
           )}
         </ul>
+      )}
+
+      {/* Large Devices Menu */}
+      <div className="hidden md:flex items-center gap-6">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? "text-primary font-bold" : "text-base-content"
+          }
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/marathons"
+          className={({ isActive }) =>
+            isActive ? "text-primary font-bold" : "text-base-content"
+          }
+        >
+          Marathons
+        </NavLink>
+        {user ? (
+          <>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                isActive ? "text-primary font-bold" : "text-base-content"
+              }
+            >
+              Dashboard
+            </NavLink>
+            <div className="flex items-center gap-4">
+              <div className="avatar">
+                <div className="w-8 rounded-full">
+                  <img
+                    src={user?.photoURL || "https://via.placeholder.com/40"}
+                    alt="User Profile"
+                    className="rounded-full border-2 border-yellow-300"
+                  />
+                </div>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="btn btn-outline btn-sm text-base-content"
+              >
+                Logout
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive ? "text-primary font-bold" : "text-base-content"
+              }
+            >
+              Login
+            </NavLink>
+            <NavLink
+              to="/register"
+              className={({ isActive }) =>
+                isActive ? "text-primary font-bold" : "text-base-content"
+              }
+            >
+              Register
+            </NavLink>
+          </>
+        )}
       </div>
     </nav>
   );

@@ -1,9 +1,11 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { AuthContext } from '../../authentication/AuthProvider';
 
 export default function AddMarathon() {
+  const {user} = useContext(AuthContext)
   const [marathonData, setMarathonData] = useState({
     title: '',
     startRegistrationDate: null,
@@ -15,6 +17,7 @@ export default function AddMarathon() {
     marathonImage: '',
     createdAt: new Date(),
     count: 0,
+    email: user?.email,
   });
 
   // Handle input changes
