@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 export default function MarathonDetails() {
   const { id } = useParams();
   const [marathon, setMarathon] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch marathon details by ID
@@ -57,6 +58,19 @@ export default function MarathonDetails() {
   const isRegistrationOpen =
     new Date(startRegistrationDate) <= new Date() && new Date() <= new Date(endRegistrationDate);
 
+  const startDate = new Date(marathonStartDate);
+  const currentTime = new Date();
+  const remainingTime = Math.max(0, (startDate - currentTime) / 1000); // Remaining time in seconds
+
+  const renderTime = ({ days, hours, minutes, seconds }) => (
+    <div className="text-center">
+      <div className="text-2xl font-semibold text-gray-700">{days} Days</div>
+      <div className="text-2xl font-semibold text-gray-700">{hours} Hours</div>
+      <div className="text-2xl font-semibold text-gray-700">{minutes} Minutes</div>
+      <div className="text-2xl font-semibold text-gray-700">{seconds} Seconds</div>
+    </div>
+  );
+
   return (
     <div className="p-6 max-w-4xl mx-auto bg-white shadow-md rounded-lg">
       <div className="mb-6">
@@ -91,12 +105,34 @@ export default function MarathonDetails() {
         <strong>Created At:</strong> {new Date(createdAt).toLocaleDateString()}
       </p>
 
+      {/* Countdown Timer Section */}
+      <div className="mb-8">
+        <h2 className="text-xl font-bold mb-4 text-center">Countdown to Marathon</h2>
+        <div className="flex justify-center items-center">
+          <CountdownCircleTimer
+            isPlaying
+            duration={remainingTime}
+            colors={['#3b82f6', '#fbbf24', '#ef4444']}
+            colorsTime={[remainingTime, remainingTime / 2, 0]}
+            size={200}
+            strokeWidth={8}
+            trailColor="#f3f4f6"
+          >
+            {({ remainingTime }) => {
+              const days = Math.floor(remainingTime / 86400);
+              const hours = Math.floor((remainingTime % 86400) / 3600);
+              const minutes = Math.floor((remainingTime % 3600) / 60);
+              const seconds = remainingTime % 60;
+              return renderTime({ days, hours, minutes, seconds });
+            }}
+          </CountdownCircleTimer>
+        </div>
+      </div>
+
       <button
         disabled={!isRegistrationOpen}
-        className={`btn w-full ${
-          isRegistrationOpen ? 'btn-primary' : 'btn-disabled'
-        }`}
-        onClick={()=>navigate(`/marathon-registration/${id}`)}
+        className={`btn w-full ${isRegistrationOpen ? 'btn-primary' : 'btn-disabled'}`}
+        onClick={() => navigate(`/marathon-registration/${id}`)}
       >
         {isRegistrationOpen ? 'Register Now' : 'Registration Closed'}
       </button>

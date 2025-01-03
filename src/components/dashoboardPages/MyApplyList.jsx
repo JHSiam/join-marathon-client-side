@@ -1,31 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../authentication/AuthProvider';
 import axios from 'axios';
-import { FaEdit, FaTrashAlt, FaSearch } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
 export default function MyApplyList() {
   const { user } = useContext(AuthContext);
   const [marathons, setMarathons] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTitle, setSearchTitle] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [currentMarathon, setCurrentMarathon] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
+  const fetchMarathons = (title = '') => {
     if (!user?.email) return;
 
-    fetchMarathons();
-  }, [user?.email]);
-
-  const fetchMarathons = (query = '') => {
-    setLoading(true);
-    const endpoint = query
-      ? `http://localhost:5000/registrations/${user.email}?title=${query}`
-      : `http://localhost:5000/registrations/${user.email}`;
-
     axios
-      .get(endpoint)
+      .get(`http://localhost:5000/registrations/${user.email}`, {
+        params: { title },
+      })
       .then((response) => {
         setMarathons(response.data);
         setLoading(false);
@@ -36,8 +29,12 @@ export default function MyApplyList() {
       });
   };
 
+  useEffect(() => {
+    fetchMarathons();
+  }, [user?.email]);
+
   const handleSearch = () => {
-    fetchMarathons(searchQuery);
+    fetchMarathons(searchTitle);
   };
 
   const handleOpenModal = (marathon) => {
@@ -112,33 +109,22 @@ export default function MyApplyList() {
     );
   }
 
-  if (marathons.length === 0) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-lg font-semibold text-gray-600">No marathon events found.</p>
-      </div>
-    );
-  }
-
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4 text-center text-blue-600">My Apply List</h1>
 
-      {/* Search Bar */}
-      <div className="mb-6 flex items-center gap-2">
+      {/* Search Input */}
+      <div className="flex justify-end mb-4">
         <input
           type="text"
-          placeholder="Search by Title"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="input input-bordered flex-grow"
+          value={searchTitle}
+          onChange={(e) => setSearchTitle(e.target.value)}
+          placeholder="Search by title"
+          className="input input-bordered mr-2"
         />
-        <button onClick={handleSearch} className="btn btn-primary flex items-center gap-2">
-          <FaSearch /> Search
-        </button>
+        <button onClick={handleSearch} className="btn btn-primary">Search</button>
       </div>
 
-      {/* Table */}
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300 rounded-lg shadow-lg">
           <thead>
@@ -154,32 +140,17 @@ export default function MyApplyList() {
             {marathons.map((marathon, index) => (
               <tr
                 key={marathon._id}
-                className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-gray-100'
-                  } hover:bg-gray-200 transition duration-200`}
+                className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-gray-100'} hover:bg-gray-200 transition duration-200`}
               >
-                <td className="border border-gray-300 px-4 py-2 text-gray-700 font-medium">
-                  {marathon.title}
-                </td>
-                <td className="border border-gray-300 px-4 py-2 text-gray-600">
-                  {new Date(marathon.marathonStartDate).toLocaleDateString()}
-                </td>
-                <td className="border border-gray-300 px-4 py-2 text-gray-600">
-                  {marathon.firstName}
-                </td>
-                <td className="border border-gray-300 px-4 py-2 text-gray-600">
-                  {marathon.contactNumber}
-                </td>
+                <td className="border border-gray-300 px-4 py-2 text-gray-700 font-medium">{marathon.title}</td>
+                <td className="border border-gray-300 px-4 py-2 text-gray-600">{new Date(marathon.marathonStartDate).toLocaleDateString()}</td>
+                <td className="border border-gray-300 px-4 py-2 text-gray-600">{marathon.firstName}</td>
+                <td className="border border-gray-300 px-4 py-2 text-gray-600">{marathon.contactNumber}</td>
                 <td className="border border-gray-300 px-4 py-2 flex gap-4 justify-center">
-                  <button
-                    onClick={() => handleOpenModal(marathon)}
-                    className="btn btn-sm btn-primary flex items-center gap-2 shadow-md"
-                  >
+                  <button onClick={() => handleOpenModal(marathon)} className="btn btn-sm btn-primary flex items-center gap-2 shadow-md">
                     <FaEdit /> Update
                   </button>
-                  <button
-                    className="btn btn-sm btn-error flex items-center gap-2 shadow-md"
-                    onClick={() => handleDelete(marathon._id)}
-                  >
+                  <button onClick={() => handleDelete(marathon._id)} className="btn btn-sm btn-error flex items-center gap-2 shadow-md">
                     <FaTrashAlt /> Delete
                   </button>
                 </td>
@@ -188,6 +159,93 @@ export default function MyApplyList() {
           </tbody>
         </table>
       </div>
+
+      {/* Update Modal */}
+      {modalOpen && currentMarathon && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
+          <div className="bg-white rounded-lg p-6 w-full max-w-2xl shadow-lg">
+            <h2 className="text-xl font-bold mb-6 text-blue-600 text-center">Update Registration</h2>
+            <form onSubmit={handleUpdate}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Title (Read-only) */}
+                <div className="mb-4">
+                  <label className="block font-semibold text-gray-700">Title</label>
+                  <input
+                    type="text"
+                    value={currentMarathon.title}
+                    readOnly
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                {/* Marathon Start Date (Read-only) */}
+                <div className="mb-4">
+                  <label className="block font-semibold text-gray-700">Marathon Start Date</label>
+                  <input
+                    type="text"
+                    value={new Date(currentMarathon.marathonStartDate).toLocaleDateString()}
+                    readOnly
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                {/* First Name */}
+                <div className="mb-4">
+                  <label className="block font-semibold text-gray-700">First Name</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    defaultValue={currentMarathon.firstName}
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                {/* Last Name */}
+                <div className="mb-4">
+                  <label className="block font-semibold text-gray-700">Last Name</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    defaultValue={currentMarathon.lastName}
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                {/* Contact Number */}
+                <div className="mb-4">
+                  <label className="block font-semibold text-gray-700">Contact Number</label>
+                  <input
+                    type="text"
+                    name="contactNumber"
+                    defaultValue={currentMarathon.contactNumber}
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                {/* Additional Info */}
+                <div className="mb-4 col-span-1 md:col-span-2">
+                  <label className="block font-semibold text-gray-700">Additional Info</label>
+                  <textarea
+                    name="additionalInfo"
+                    defaultValue={currentMarathon.additionalInfo}
+                    className="textarea textarea-bordered w-full"
+                  ></textarea>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex justify-end gap-4 mt-6">
+                <button type="button" onClick={handleCloseModal} className="btn btn-secondary">
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
