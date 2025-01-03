@@ -41,6 +41,8 @@ export default function MarathonRegistration() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const registrationData = {
+            title: title,
+            marathonStartDate: marathonStartDate,
             registerEmail: user?.email,
             marathonId: id,
             ...formData,

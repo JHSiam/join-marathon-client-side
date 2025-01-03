@@ -85,14 +85,7 @@ export default function MyMarathonList() {
   };
 
   const handleDelete = async (id) => {
-    // if (window.confirm('Are you sure you want to delete this marathon?')) {
-    //   try {
-    //     await axios.delete(`http://localhost:5000/marathons/${id}`);
-    //     setMarathons((prev) => prev.filter((marathon) => marathon._id !== id));
-    //   } catch (error) {
-    //     console.error('Error deleting marathon:', error);
-    //   }
-    // }
+    
 
     Swal.fire({
       title: 'Are you sure?',

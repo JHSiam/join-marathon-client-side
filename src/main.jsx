@@ -18,6 +18,7 @@ import MarathonsGrid from './components/dashoboardPages/MarathonsGrid.jsx';
 import MarathonDetails from './components/dashoboardPages/MarathonDetails.jsx';
 import MarathonRegistration from './components/MarathonRegistration.jsx';
 import PrivatePage from './routes/PrivatePage.jsx';
+import HomePage from './components/homepages/HomePage.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
     children: [
       {
         path:"/",
-        element: <div>Hello</div>
+        element: <HomePage></HomePage>
       },
       {
         path:"/login",
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
           {
             path:"my-apply-list",
             element:<PrivatePage><MyApplyList></MyApplyList></PrivatePage>
+          },
+          {
+            path:"",
+            element:<PrivatePage><AddMarathon></AddMarathon></PrivatePage>
           }
         ]
       },
