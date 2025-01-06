@@ -5,6 +5,7 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Swal from 'sweetalert2';
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function MyMarathonList() {
   const { user } = useContext(AuthContext);
@@ -77,6 +78,7 @@ export default function MyMarathonList() {
             marathon._id === currentMarathon._id ? { ...marathon, ...updatedMarathon } : marathon
           )
         );
+        toast.success('Marathon updated successfully!');
         closeModal();
       }
     } catch (error) {
@@ -129,6 +131,7 @@ export default function MyMarathonList() {
 
   return (
     <div className="p-6">
+      <ToastContainer position="top-center" autoClose={3000} />
       <h1 className="text-2xl font-bold mb-4 text-center text-blue-600">My Marathon List</h1>
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300 rounded-lg shadow-lg">

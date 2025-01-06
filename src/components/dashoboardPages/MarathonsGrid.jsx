@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MarathonCard from './MarathonCard';
 import { FaSort } from 'react-icons/fa'; // Font Awesome sorting icon
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+//import { Helmet } from 'react-helmet';
 
 export default function MarathonsGrid() {
   const [marathons, setMarathons] = useState([]);
@@ -54,6 +56,7 @@ export default function MarathonsGrid() {
 
   return (
     <div className="p-6">
+       <HelmetProvider><Helmet><title>Marathon - Join Marahton</title></Helmet></HelmetProvider>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Marathon Events</h2>
         <div className="flex items-center space-x-3">

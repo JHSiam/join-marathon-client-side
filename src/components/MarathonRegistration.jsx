@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../authentication/AuthProvider";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function MarathonRegistration() {
     const { id } = useParams();
@@ -19,13 +21,14 @@ export default function MarathonRegistration() {
     useEffect(() => {
         // Fetch marathon details by ID
         axios
-            .get(`https://join-marathon-server-site.vercel.app/users/${id}`, {withCredentials: true})
+            .get(`https://join-marathon-server-site.vercel.app/users/${id}`, { withCredentials: true })
             .then((response) => {
                 setMarathon(response.data);
                 setLoading(false);
             })
             .catch((error) => {
                 console.error("Error fetching marathon details:", error);
+                toast.error("Failed to load marathon details.");
                 setLoading(false);
             });
     }, [id]);
@@ -41,35 +44,30 @@ export default function MarathonRegistration() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const registrationData = {
-            title: title,
-            marathonStartDate: marathonStartDate,
+            title: marathon.title,
+            marathonStartDate: marathon.marathonStartDate,
             registerEmail: user?.email,
             marathonId: id,
             ...formData,
         };
 
-        //console.log(registrationData);
-
-
         axios
             .post("https://join-marathon-server-site.vercel.app/registrations", registrationData)
             .then((response) => {
-                alert("Registration successful!");
-
-                // Update the marathon's count
+                toast.success("Registration successful!");
                 return axios.put(`https://join-marathon-server-site.vercel.app/users/${id}`, { count: marathon.count + 1 });
             })
             .then((response) => {
                 if (response.data.modifiedCount > 0 || response.data.upsertedCount > 0) {
-                    setMarathon((prev) => ({ ...prev, count: prev.count + 1 })); // Update the state
-                    alert("Marathon count updated successfully!");
+                    setMarathon((prev) => ({ ...prev, count: prev.count + 1 }));
+                    toast.success("Marathon count updated successfully!");
                 } else {
-                    alert("Count update failed. Please refresh and try again.");
+                    toast.warn("Count update failed. Please refresh and try again.");
                 }
             })
             .catch((error) => {
                 console.error("Error during registration or updating count:", error);
-                alert("Something went wrong. Please try again.");
+                toast.error("Something went wrong. Please try again.");
             });
     };
 
@@ -96,6 +94,7 @@ export default function MarathonRegistration() {
 
     return (
         <div className="container mx-auto py-8">
+            <ToastContainer position="top-center" autoClose={3000} />
             <h2 className="text-2xl font-bold text-center mb-6">Register for {title}</h2>
             <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-6 shadow-md rounded-md">
                 <div className="mb-4">

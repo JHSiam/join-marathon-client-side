@@ -1,11 +1,12 @@
 import React from 'react'
+//import { Helmet } from 'react-helmet'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { NavLink, Outlet } from 'react-router-dom'
 
 export default function Dashboard() {
     return (
         <div>
-
-            <h1 className='text-center'>DashBoard</h1>
+            <HelmetProvider><Helmet><title>Dashboard - Join Marahton</title></Helmet></HelmetProvider>
 
             <div className='flex flex-col gap-5 lg:flex-row justify-center'>
                 <div className='flex flex-col gap-5 items-center border-2 border-[#D9D9D9] rounded-xl p-4 h-fit'>

@@ -163,11 +163,11 @@ export default function MyApplyList() {
 
       {/* Update Modal */}
       {modalOpen && currentMarathon && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
-          <div className="bg-white rounded-lg p-6 w-full max-w-2xl shadow-lg">
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-2xl mx-4 shadow-lg">
             <h2 className="text-xl font-bold mb-6 text-blue-600 text-center">Update Registration</h2>
             <form onSubmit={handleUpdate}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 {/* Title (Read-only) */}
                 <div className="mb-4">
                   <label className="block font-semibold text-gray-700">Title</label>
@@ -224,7 +224,7 @@ export default function MyApplyList() {
                 </div>
 
                 {/* Additional Info */}
-                <div className="mb-4 col-span-1 md:col-span-2">
+                <div className="mb-4 col-span-2">
                   <label className="block font-semibold text-gray-700">Additional Info</label>
                   <textarea
                     name="additionalInfo"
@@ -247,6 +247,8 @@ export default function MyApplyList() {
           </div>
         </div>
       )}
+
+
     </div>
   );
 }

@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
@@ -14,7 +12,9 @@ function App() {
     <NavBar>
     </NavBar>
 
+    <div className='max-w-[1380px] mx-auto mt-8 mb-8'>
     <Outlet></Outlet>
+    </div>
 
     <Footer></Footer>
 

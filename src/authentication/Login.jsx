@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from './AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+//import { Helmet } from 'react-helmet';
 
 export default function Login() {
   const { userLogin, setUser, logInWithGoogle } = useContext(AuthContext);
@@ -60,6 +62,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-green-300 flex items-center justify-center">
+       <HelmetProvider><Helmet><title>Login - Join Marahton</title></Helmet></HelmetProvider>
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Login to Your Account

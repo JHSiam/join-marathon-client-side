@@ -4,6 +4,8 @@ import { AuthContext } from "./AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+//import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 export default function Register() {
     const { createNewUser, setUser, updateUserProfile, logInWithGoogle } =
@@ -85,6 +87,7 @@ export default function Register() {
 
     return (
         <div className="min-h-screen bg-green-300 flex items-center justify-center">
+             <HelmetProvider><Helmet><title>Register - Join Marahton</title></Helmet></HelmetProvider>
             <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md py-4">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
                     Create an Account
