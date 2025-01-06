@@ -54,12 +54,6 @@ A platform designed to explore, register, and participate in marathon events wor
    npm start
    ```
 
-3. **Backend Setup:**
-   ```bash
-   cd backend
-   
-
----
 
 ## Contribution
 We welcome contributions! Feel free to open an issue or submit a pull request to suggest enhancements or report bugs.
