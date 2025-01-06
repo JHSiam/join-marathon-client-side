@@ -58,7 +58,7 @@ A platform designed to explore, register, and participate in marathon events wor
    ```bash
    cd backend
    npm install
-   npm start
+   
    ```
 
 ---
