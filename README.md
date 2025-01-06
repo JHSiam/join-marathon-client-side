@@ -47,13 +47,6 @@ A platform designed to explore, register, and participate in marathon events wor
    git clone https://github.com/JHSiam/join-marathon-client-side
    ```
 
-2. **Frontend Setup:**
-   ```bash
-   cd frontend
-   npm install
-   npm start
-   ```
-
 
 ## Contribution
 We welcome contributions! Feel free to open an issue or submit a pull request to suggest enhancements or report bugs.
