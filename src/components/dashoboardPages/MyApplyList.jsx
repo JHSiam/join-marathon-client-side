@@ -16,8 +16,9 @@ export default function MyApplyList() {
     if (!user?.email) return;
 
     axios
-      .get(`http://localhost:5000/registrations/${user.email}`, {
+      .get(`https://join-marathon-server-site.vercel.app/registrations/${user.email}`, {
         params: { title },
+        withCredentials: true
       })
       .then((response) => {
         setMarathons(response.data);
@@ -58,7 +59,7 @@ export default function MyApplyList() {
     };
 
     axios
-      .put(`http://localhost:5000/registrations/${currentMarathon._id}`, updatedData)
+      .put(`https://join-marathon-server-site.vercel.app/registrations/${currentMarathon._id}`, updatedData)
       .then((response) => {
         if (response.data.modifiedCount > 0) {
           Swal.fire('Success', 'Registration updated successfully', 'success');
@@ -88,7 +89,7 @@ export default function MyApplyList() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5000/registrations/${id}`);
+          await axios.delete(`https://join-marathon-server-site.vercel.app/registrations/${id}`);
           setMarathons((prev) => prev.filter((marathon) => marathon._id !== id));
           Swal.fire('Deleted!', 'Your campaign has been deleted.', 'success');
         } catch (error) {

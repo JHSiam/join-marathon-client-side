@@ -40,7 +40,7 @@ export default function AddMarathon() {
   const handleCreateMarathon = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/users', marathonData);
+      const response = await axios.post('https://join-marathon-server-site.vercel.app/users', marathonData, {withCredentials: true});
       console.log('Marathon updated successfully:', response.data);
       alert('Marathon updated successfully!');
     } catch (error) {

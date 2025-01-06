@@ -9,7 +9,7 @@ export default function MarathonsLimit() {
   useEffect(() => {
     // Fetch data from API
     axios
-      .get('http://localhost:5000/home-marathon')
+      .get('https://join-marathon-server-site.vercel.app/home-marathon')
       .then((response) => {
         setMarathons(response.data); // Assuming response.data contains the marathon data
         setLoading(false); // Stop loading

@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { auth } from "./firebase.config";
 import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
+import axios from "axios";
 
 
 export const AuthContext = createContext();
@@ -48,6 +49,25 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser?.email) {
+        const user = { email: currentUser.email };
+
+        axios.post('https://join-marathon-server-site.vercel.app/jwt', user, { withCredentials: true })
+          .then(res => {
+            console.log('login token', res.data);
+            setLoading(false);
+          })
+
+      }
+      else {
+        axios.post('https://join-marathon-server-site.vercel.app/logout', {}, {
+          withCredentials: true
+        })
+          .then(res => {
+            console.log('logout', res.data);
+            setLoading(false);
+          })
+      }
       setLoading(false);
     });
     return () => {

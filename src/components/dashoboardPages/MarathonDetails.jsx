@@ -12,7 +12,7 @@ export default function MarathonDetails() {
   useEffect(() => {
     // Fetch marathon details by ID
     axios
-      .get(`http://localhost:5000/users/${id}`)
+      .get(`https://join-marathon-server-site.vercel.app/users/${id}`, {withCredentials: true})
       .then((response) => {
         setMarathon(response.data);
         setLoading(false);

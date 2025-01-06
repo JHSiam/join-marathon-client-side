@@ -11,7 +11,9 @@ export default function MarathonsGrid() {
   const fetchMarathons = (sort = 'new-to-old') => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/users?sort=${sort}`)
+      .get(`https://join-marathon-server-site.vercel.app/users?sort=${sort}`,{
+        withCredentials: true
+      })
       .then((response) => {
         setMarathons(response.data);
         setLoading(false);

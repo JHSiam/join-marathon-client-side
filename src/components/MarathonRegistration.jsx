@@ -19,7 +19,7 @@ export default function MarathonRegistration() {
     useEffect(() => {
         // Fetch marathon details by ID
         axios
-            .get(`http://localhost:5000/users/${id}`)
+            .get(`https://join-marathon-server-site.vercel.app/users/${id}`, {withCredentials: true})
             .then((response) => {
                 setMarathon(response.data);
                 setLoading(false);
@@ -52,12 +52,12 @@ export default function MarathonRegistration() {
 
 
         axios
-            .post("http://localhost:5000/registrations", registrationData)
+            .post("https://join-marathon-server-site.vercel.app/registrations", registrationData)
             .then((response) => {
                 alert("Registration successful!");
 
                 // Update the marathon's count
-                return axios.put(`http://localhost:5000/users/${id}`, { count: marathon.count + 1 });
+                return axios.put(`https://join-marathon-server-site.vercel.app/users/${id}`, { count: marathon.count + 1 });
             })
             .then((response) => {
                 if (response.data.modifiedCount > 0 || response.data.upsertedCount > 0) {
