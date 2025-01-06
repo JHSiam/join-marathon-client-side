@@ -7,7 +7,7 @@ export default function ErrorPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-800 px-4">
-      {/* new */}
+      {/* dkjasj */}
       <h1 className="text-9xl font-bold text-red-500">404</h1>
       <h2 className="text-3xl font-semibold mt-4">Oops! Page Not Found</h2>
       <p className="text-lg text-center max-w-md mt-2">
