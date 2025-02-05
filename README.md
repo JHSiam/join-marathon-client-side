@@ -43,15 +43,35 @@ A platform designed to explore, register, and participate in marathon events wor
 
 ---
 
-## Installation
+## 🏗️ **How to Run the Project Locally**
+Follow these steps to set up and run the project on your local machine:
 
-1. **Clone the Repository:**
-   ```bash
+1. **Clone the Repository**
+   ```sh
    git clone https://github.com/JHSiam/join-marathon-client-side
    ```
 
-2. **View the Full Installation Process:**  
-   [Installation Guide](https://github.com/JHSiam/join-marathon-client-side)
+2. **Navigate to the Project Directory**
+   ```sh
+   cd join-marathon-client-side
+   ```
+
+3. **Install Dependencies**
+   ```sh
+   npm install
+   ```
+
+4. **Set Up Environment Variables**
+   - Create a `.env` file in the root directory.
+   - Add necessary environment variables (such as Firebase credentials, MongoDB URI, etc.).
+
+5. **Start the Development Server**
+   ```sh
+   npm start
+   ```
+
+6. **Access the Application**
+   - Open your browser and go to `http://localhost:3000/`.
 
 ---
 
@@ -60,10 +80,7 @@ We welcome contributions! Feel free to open an issue or submit a pull request to
 
 ---
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
 
----
 
 **Contact:** [iamjhsiam@gmail.com]
 
