@@ -21,7 +21,7 @@ const NavBar = () => {
       {/* Logo */}
       <div className="">
         <NavLink to="/" className="btn btn-ghost normal-case text-xl">
-          MyApp
+          Join Marathon
         </NavLink>
 
         

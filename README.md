@@ -4,7 +4,6 @@ A platform designed to explore, register, and participate in marathon events wor
 
 🌐 **Live Site URL:** [Join Marathon](https://join-marathon.web.app/)  
 
-
 ---
 
 ## Features
@@ -27,6 +26,10 @@ A platform designed to explore, register, and participate in marathon events wor
 6. **Error Handling:**
    - Graceful error messages for failed data fetches or empty datasets.
 
+---
+
+## 🖼️ Website
+![Join Marathon](https://i.ibb.co.com/7JH1ycp3/Screenshot-2025-02-05-190922.png)
 
 ---
 
@@ -47,6 +50,10 @@ A platform designed to explore, register, and participate in marathon events wor
    git clone https://github.com/JHSiam/join-marathon-client-side
    ```
 
+2. **View the Full Installation Process:**  
+   [Installation Guide](https://github.com/JHSiam/join-marathon-client-side)
+
+---
 
 ## Contribution
 We welcome contributions! Feel free to open an issue or submit a pull request to suggest enhancements or report bugs.
@@ -58,5 +65,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ---
 
-**Contact:** [iamjhsiam@gmail.com] 
+**Contact:** [iamjhsiam@gmail.com]
 
