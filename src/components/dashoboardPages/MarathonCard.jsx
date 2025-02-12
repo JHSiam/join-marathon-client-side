@@ -13,7 +13,7 @@ export default function MarathonCard({ marathon }) {
   };
 
   return (
-    <div className="card bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg rounded-lg overflow-hidden">
+    <div className="card bg-blue-300 text-black shadow-lg rounded-lg overflow-hidden">
       {/* Marathon Image */}
       <img
         src={marathon.marathonImage}

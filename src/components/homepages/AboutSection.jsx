@@ -2,7 +2,7 @@ import { FaRunning } from "react-icons/fa";
 
 const AboutSection = () => {
   return (
-    <section className="bg-blue-100 py-16 px-6 text-center">
+    <section className=" py-16 px-6 text-center">
       <div className="max-w-4xl mx-auto">
         <div className="bg-blue-600 text-white shadow-xl rounded-2xl p-8">
           <div className="flex flex-col items-center space-y-4">
