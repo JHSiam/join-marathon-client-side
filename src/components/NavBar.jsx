@@ -17,7 +17,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="navbar shadow-md px-6 md:px-8 flex justify-between bg-blue-300 w-full mx-auto sticky top-0 z-50">
+    <nav className="navbar shadow-md px-6 md:px-14 flex justify-between bg-blue-300 w-full mx-auto sticky top-0 z-50">
       {/* Logo */}
       <div className="">
         <NavLink to="/" className="btn btn-ghost normal-case text-xl">

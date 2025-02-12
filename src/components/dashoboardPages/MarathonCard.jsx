@@ -39,7 +39,7 @@ export default function MarathonCard({ marathon }) {
         {/* See Details Button */}
         <div className="mt-4">
           <button
-            className="btn btn-light w-full py-2 px-4 rounded-md transition-colors duration-200 bg-yellow-200 hover:bg-blue-700"
+            className="btn btn-light w-full py-2 px-4 rounded-md transition-colors duration-200 bg-blue-600 hover:bg-blue-700"
             onClick={() => navigate(`/details/${marathon._id}`)}
           >
             See Details
