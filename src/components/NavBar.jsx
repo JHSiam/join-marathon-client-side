@@ -17,7 +17,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="navbar shadow-md px-4 md:px-8 relative flex justify-between bg-blue-300 max-w-[1380px] mx-auto">
+    <nav className="navbar shadow-md px-6 md:px-8 relative flex justify-between bg-blue-300 w-full mx-auto">
       {/* Logo */}
       <div className="">
         <NavLink to="/" className="btn btn-ghost normal-case text-xl">
@@ -58,6 +58,20 @@ const NavBar = () => {
             >
               Marathons
             </NavLink>
+            
+          </li>
+
+          <li>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? "text-primary font-bold" : "text-base-content"
+              }
+              onClick={() => setIsMenuOpen(false)}
+            >
+              About
+            </NavLink>
+            
           </li>
           {user ? (
             <>
@@ -138,6 +152,15 @@ const NavBar = () => {
           }
         >
           Marathons
+        </NavLink>
+
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            isActive ? "text-primary font-bold" : "text-base-content"
+          }
+        >
+          About
         </NavLink>
         {user ? (
           <>

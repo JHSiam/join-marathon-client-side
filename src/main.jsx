@@ -19,6 +19,7 @@ import MarathonDetails from './components/dashoboardPages/MarathonDetails.jsx';
 import MarathonRegistration from './components/MarathonRegistration.jsx';
 import PrivatePage from './routes/PrivatePage.jsx';
 import HomePage from './components/homepages/HomePage.jsx';
+import AboutSection from './components/homepages/AboutSection.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path:"/marathon-registration/:id",
         element:<PrivatePage><MarathonRegistration></MarathonRegistration></PrivatePage>
+      },
+      {
+        path: "/about",
+        element: <AboutSection></AboutSection>
       }
     ]
     

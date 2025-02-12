@@ -22,7 +22,7 @@ const reasons = [
 
 const WhyJoinMarathons = () => {
   return (
-    <div className="bg-gray-100 py-16">
+    <div className="bg-gray-100 py-16" id="about">
       <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 text-blue-600">
         Why Join a Marathon?
       </h2>
