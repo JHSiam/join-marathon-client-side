@@ -171,7 +171,7 @@ export default function Register() {
                     </div>
 
                     {/* Register Button */}
-                    <button type="submit" className="btn btn-primary w-full mb-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                    <button type="submit" className="btn btn-light w-full py-2 px-4 rounded-md transition-colors duration-200 bg-blue-600 hover:bg-blue-700">
                         Register
                     </button>
                 </form>
