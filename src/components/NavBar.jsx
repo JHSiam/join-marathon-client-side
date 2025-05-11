@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { AuthContext } from "../authentication/AuthProvider";
@@ -6,6 +6,27 @@ import { AuthContext } from "../authentication/AuthProvider";
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
+  const [theme, setTheme] = useState(
+    localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
+  );
+
+  function handleThemeToggle(e) {
+    if (e.target.checked) {
+      setTheme("dark")
+    }
+    else {
+      setTheme("light")
+    }
+
+  };
+
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem('theme');
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+
+  }, [theme])
 
   const handleLogout = () => {
     logout();
@@ -210,6 +231,7 @@ const NavBar = () => {
             </NavLink>
           </>
         )}
+        <input type="checkbox" value="synthwave" className="toggle theme-controller" onChange={handleThemeToggle}/>
       </div>
     </nav>
   );
