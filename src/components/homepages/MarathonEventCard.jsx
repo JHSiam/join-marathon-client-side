@@ -107,7 +107,7 @@ const MarathonEventCard = () => {
               </p>
             </div>
             <div className="mt-4 text-center">
-              <button onClick={()=>navigate('/marathons')} className="btn btn-light w-full py-2 px-4 rounded-md transition-colors duration-200 bg-blue-600 hover:bg-blue-700">
+              <button onClick={()=>navigate('/marathons')} className="btn btn-light w-full py-2 px-4 rounded-md transition-colors duration-200 bg-blue-600 hover:bg-blue-700" disabled>
                 See More
               </button>
             </div>

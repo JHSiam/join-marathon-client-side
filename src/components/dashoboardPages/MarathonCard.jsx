@@ -13,7 +13,7 @@ export default function MarathonCard({ marathon }) {
   };
 
   return (
-    <div className="card bg-blue-300 text-black shadow-lg rounded-lg overflow-hidden">
+    <div className="card bg-base-300 shadow-lg rounded-lg overflow-hidden">
       {/* Marathon Image */}
       <img
         src={marathon.marathonImage}
@@ -25,14 +25,14 @@ export default function MarathonCard({ marathon }) {
         <h3 className="text-2xl font-bold mb-2">{marathon.title}</h3>
 
         {/* Location */}
-        <div className="flex items-center text-sm text-gray-200 mt-2">
-          <MdLocationOn className="mr-2 text-white" />
+        <div className="flex items-center text-sm  mt-2">
+          <MdLocationOn className="mr-2" />
           <span>{marathon.location}</span>
         </div>
 
         {/* Registration Dates */}
-        <div className="flex items-center text-sm text-gray-200 mt-2">
-          <FaCalendarAlt className="mr-2 text-white" />
+        <div className="flex items-center text-sm  mt-2">
+          <FaCalendarAlt className="mr-2 " />
           <span>{formatDate(marathon.startRegistrationDate)} - {formatDate(marathon.endRegistrationDate)}</span>
         </div>
 
